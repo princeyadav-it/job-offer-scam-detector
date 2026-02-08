@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Offer Letter & Company Verifier</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header>
+  <div class="logo">AI Verifier</div>
+
+  <nav id="navMenu">
+    <a href="#home">Home</a>
+    <a href="#verify">Verify</a>
+    <a href="#how">How It Works</a>
+    <a href="#contact">Contact</a>
+    <a href="login.html">Admin</a>
+  </nav>
+
+  <div class="hamburger" onclick="toggleMenu()">☰</div>
+</header>
+
+<!-- ================= HERO / FIRST PAGE ================= -->
+<section class="hero" id="home">
+  <h1>AI-Based Offer Letter & Company Verifier</h1>
+
+  <p class="hero-sub">
+    Many job seekers fall victim to fake offer letters and scam companies.
+    This system helps you verify job offer letters using
+    <b>Artificial Intelligence, Machine Learning, and Document Analysis</b>.
+  </p>
+
+  <p class="hero-sub">
+    The application analyzes company details, document patterns,
+    suspicious keywords, and formatting issues to predict whether
+    an offer letter is <b>Genuine</b>, <b>Suspected</b>, or <b>Fake</b>.
+  </p>
+
+  <a href="#verify" class="btn">Start Verification</a>
+</section>
+
+<!-- ================= MAIN VERIFICATION SECTION ================= -->
+<section class="verify" id="verify">
+  <h2>Verify Your Offer Letter</h2>
+
+  <p class="section-desc">
+    Upload your job offer letter in PDF or Image format.
+    Our AI system will analyze the document and give a risk-based result.
+  </p>
+
+  <div class="verify-box">
+
+    <label class="file-label" id="fileLabel">
+      📄 Select Offer Letter File
+      <input type="file" id="fileInput" accept=".pdf,.jpg,.png">
+      <span id="fileName">No file selected</span>
+    </label>
+
+    <button class="btn verify-btn" id="verifyBtn">
+      Verify Offer Letter
+    </button>
+
+    <!-- Loader -->
+    <div id="loader" class="loader" style="display:none;">
+      🔍 Analyzing your offer letter...
+    </div>
+
+
+    <div class="result" id="resultBox">
+      <b>Status:</b>
+      <span id="resultStatus"></span>
+      <p id="resultMsg"></p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ================= HOW IT WORKS ================= -->
+<section class="how" id="how">
+  <h2>How This System Works</h2>
+
+  <div class="steps">
+    <div class="step">
+      <h3>1. Upload Document</h3>
+      <p>
+        The user uploads an offer letter received via email or WhatsApp.
+      </p>
+    </div>
+
+    <div class="step">
+      <h3>2. AI Analysis</h3>
+      <p>
+        AI extracts text, detects keywords, salary promises,
+        company format, and suspicious patterns.
+      </p>
+    </div>
+
+    <div class="step">
+      <h3>3. Company Check</h3>
+      <p>
+        Company name and details are cross-verified using trusted data sources.
+      </p>
+    </div>
+
+    <div class="step">
+      <h3>4. Final Result</h3>
+      <p>
+        The system generates a verification result with risk indication.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="contact" id="contact">
+  <h2>Contact & Location</h2>
+
+  <p>
+    This project is developed as a TYBSc IT Final Year Project
+    to help students and job seekers avoid employment scams.
+  </p>
+
+  <div class="contact-info">
+    <p><b>College:</b> Bhavan’s College, Andheri (West), Mumbai</p>
+    <p><b>Email:</b> princeyadav80910@gmail.com</p>
+    <p><b>Support:</b> +91 8591063262</p>
+  </div>
+
+  <iframe
+    src="https://www.openstreetmap.org/export/embed.html?bbox=72.829%2C19.125%2C72.835%2C19.129&layer=mapnik"
+    width="100%" height="260">
+  </iframe>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <p>
+    © 2026 | AI Offer Letter & Company Verifier  
+    <br>
+    Created by <b>Prince Yadav</b>  
+    <br>
+    All Rights Reserved
+  </p>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
