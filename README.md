@@ -15,7 +15,7 @@ The backend and AI verification logic are under active development.
 
 ---
 
-## 🎯 Current Features (Frontend)
+##  Current Features (Frontend)
 - Upload offer letter (PDF / Image)
 - Clean and user-friendly UI
 - Form to enter company and job details
@@ -24,7 +24,7 @@ The backend and AI verification logic are under active development.
 
 ---
 
-## 🚧 Work in Progress
+## Work in Progress
 - Backend API development
 - AI/NLP-based text analysis
 - Company & email domain validation
@@ -46,14 +46,14 @@ The backend and AI verification logic are under active development.
 
 ---
 
-## ▶️ How to Run (Frontend)
+## How to Run (Frontend)
 1. Download or clone the repository
 2. Open `index.html` in a browser
 3. Use the UI to simulate offer letter verification
 
 ---
 
-## 👨‍💻 Author
+##  Author
 Prince Yadav  
 TYBSc IT – Bhavan’s College
 
