@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard - AI Offer Letter Verifier</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+<!-- Login Section -->
+<div id="loginSection" class="admin-login">
+  <div class="login-card">
+    <h2><i class="fas fa-shield-alt"></i> Admin Login</h2>
+    <form id="loginForm">
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" id="username" placeholder="Enter username" required>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="password" placeholder="Enter password" required>
+      </div>
+      <button type="submit" class="btn admin-btn">
+        <i class="fas fa-sign-in-alt"></i> Login
+      </button>
+      <p id="loginError" class="error-msg"></p>
+    </form>
+    <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+  </div>
+</div>
+
+<!-- Dashboard Section -->
+<div id="dashboardSection" class="admin-dashboard" style="display:none;">
+  <!-- Header -->
+  <header class="admin-header">
+    <div class="header-left">
+      <h1><i class="fas fa-shield-alt"></i> Admin Dashboard</h1>
+    </div>
+    <div class="header-right">
+      <span id="adminName"><i class="fas fa-user"></i> Admin</span>
+      <button class="btn btn-logout" id="logoutBtn">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </button>
+    </div>
+  </header>
+
+  <!-- Stats Cards -->
+  <div class="stats-container">
+    <div class="stat-card total">
+      <i class="fas fa-file-alt"></i>
+      <div class="stat-info">
+        <h3 id="totalChecks">0</h3>
+        <p>Total Checks</p>
+      </div>
+    </div>
+    <div class="stat-card genuine">
+      <i class="fas fa-check-circle"></i>
+      <div class="stat-info">
+        <h3 id="genuineCount">0</h3>
+        <p>Genuine</p>
+      </div>
+    </div>
+    <div class="stat-card suspected">
+      <i class="fas fa-exclamation-triangle"></i>
+      <div class="stat-info">
+        <h3 id="suspectedCount">0</h3>
+        <p>Suspected</p>
+      </div>
+    </div>
+    <div class="stat-card fake">
+      <i class="fas fa-times-circle"></i>
+      <div class="stat-info">
+        <h3 id="fakeCount">0</h3>
+        <p>Fake</p>
+      </div>
+    </div>
+    <div class="stat-card percentage">
+      <i class="fas fa-bullseye"></i>
+      <div class="stat-info">
+        <h3 id="scamPercentage">0%</h3>
+        <p>Scam Detection Rate</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab Navigation -->
+  <div class="tabs">
+    <button class="tab-btn" data-tab="users">
+      <i class="fas fa-users"></i> Users
+    </button>
+    <button class="tab-btn active" data-tab="scamKeywords">
+      <i class="fas fa-exclamation-triangle"></i> Scam Keywords
+    </button>
+    <button class="tab-btn" data-tab="suspiciousPhrases">
+      <i class="fas fa-comment-exclamation"></i> Suspicious Phrases
+    </button>
+    <button class="tab-btn" data-tab="suspiciousDomains">
+      <i class="fas fa-globe"></i> Suspicious Domains
+    </button>
+    <button class="tab-btn" data-tab="legitimateDomains">
+      <i class="fas fa-building"></i> Legitimate Domains
+    </button>
+  </div>
+
+  <!-- Tab Contents -->
+  
+  <!-- Users Tab -->
+  <div class="tab-content" id="users">
+    <div class="tab-header">
+      <h2><i class="fas fa-users"></i> Registered Users</h2>
+    </div>
+    <div class="users-stats">
+      <div class="stat-card users">
+        <i class="fas fa-user-plus"></i>
+        <div class="stat-info">
+          <h3 id="totalUsers">0</h3>
+          <p>Total Registered Users</p>
+        </div>
+      </div>
+    </div>
+    <div class="table-container">
+      <table class="users-table" id="usersTable">
+        <thead>
+          <tr>
+            <th><i class="fas fa-user"></i> Full Name</th>
+            <th><i class="fas fa-envelope"></i> Email</th>
+            <th><i class="fas fa-calendar"></i> Date Created</th>
+            <th><i class="fas fa-clock"></i> Last Login</th>
+            <th class="actions-column"><i class="fas fa-cogs"></i> Actions</th>
+          </tr>
+        </thead>
+        <tbody id="usersTableBody">
+          <tr class="loading-row">
+            <td colspan="5"><i class="fas fa-spinner"></i> Loading users...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Scam Keywords Tab -->
+  <div class="tab-content active" id="scamKeywords">
+    <div class="tab-header">
+      <h2><i class="fas fa-exclamation-triangle"></i> Scam Keywords Management</h2>
+      <div class="add-form">
+        <input type="text" id="newScamKeyword" placeholder="Add new scam keyword...">
+        <button class="btn admin-btn" onclick="addKeyword('scam')">
+          <i class="fas fa-plus"></i> Add
+        </button>
+      </div>
+    </div>
+    <div class="keywords-list" id="scamKeywordsList"></div>
+  </div>
+
+  <!-- Suspicious Phrases Tab -->
+  <div class="tab-content" id="suspiciousPhrases">
+    <div class="tab-header">
+      <h2><i class="fas fa-comment-exclamation"></i> Suspicious Phrases Management</h2>
+      <div class="add-form">
+        <input type="text" id="newSuspiciousPhrase" placeholder="Add new suspicious phrase...">
+        <button class="btn admin-btn" onclick="addKeyword('phrase')">
+          <i class="fas fa-plus"></i> Add
+        </button>
+      </div>
+    </div>
+    <div class="keywords-list" id="suspiciousPhrasesList"></div>
+  </div>
+
+  <!-- Suspicious Domains Tab -->
+  <div class="tab-content" id="suspiciousDomains">
+    <div class="tab-header">
+      <h2><i class="fas fa-globe"></i> Suspicious Domains Management</h2>
+      <div class="add-form">
+        <input type="text" id="newSuspiciousDomain" placeholder="Add new suspicious domain...">
+        <button class="btn admin-btn" onclick="addKeyword('domain', 'suspicious')">
+          <i class="fas fa-plus"></i> Add
+        </button>
+      </div>
+    </div>
+    <div class="keywords-list" id="suspiciousDomainsList"></div>
+  </div>
+
+  <!-- Legitimate Domains Tab -->
+  <div class="tab-content" id="legitimateDomains">
+    <div class="tab-header">
+      <h2><i class="fas fa-building"></i> Legitimate Domains Management</h2>
+      <div class="add-form">
+        <input type="text" id="newLegitimateDomain" placeholder="Add new legitimate domain...">
+        <button class="btn admin-btn" onclick="addKeyword('domain', 'legitimate')">
+          <i class="fas fa-plus"></i> Add
+        </button>
+      </div>
+    </div>
+    <div class="keywords-list" id="legitimateDomainsList"></div>
+  </div>
+
+  <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+</div>
+
+<script src="js/admin.js"></script>
+</body>
+</html>

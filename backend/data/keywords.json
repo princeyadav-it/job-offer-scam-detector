@@ -1,0 +1,56 @@
+{
+  "scam_keywords": [
+    "urgent",
+    "limited time",
+    "guaranteed",
+    "no experience required",
+    "easy money",
+    "investment required",
+    "fake company",
+    "scam",
+    "too good to be true",
+    "advance payment",
+    "confidential",
+    "exclusive offer"
+  ],
+  "suspicious_phrases": [
+    "send money first",
+    "bank details",
+    "wire transfer",
+    "crypto payment"
+  ],
+  "suspicious_domains": [
+    "gmail.com",
+    "yahoo.com",
+    "hotmail.com",
+    "outlook.com",
+    "aol.com",
+    "mail.com",
+    "protonmail.com",
+    "icloud.com",
+    "yandex.com",
+    "zoho.com"
+  ],
+  "legitimate_domains": [
+    "google.com",
+    "microsoft.com",
+    "amazon.com",
+    "apple.com",
+    "meta.com",
+    "facebook.com",
+    "netflix.com",
+    "twitter.com",
+    "linkedin.com",
+    "adobe.com"
+  ],
+  "statistics": {
+    "total_checks": 9,
+    "genuine_count": 5,
+    "suspected_count": 0,
+    "fake_count": 4
+  },
+  "admin": {
+    "username": "admin",
+    "password_hash": "$2a$10$8K1p/a0dL3.XxN/5xN.xxe4Pl2IHGCzYMJCpZ5hX9QIQpXqK3FUi"
+  }
+}

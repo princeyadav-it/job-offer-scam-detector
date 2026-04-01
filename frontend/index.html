@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Offer Letter & Company Verifier</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+<script>
+  // Check if user is logged in
+  const token = localStorage.getItem('userToken');
+  if (!token) {
+    window.location.href = 'login.html';
+  }
+</script>
+
+<!-- ================= HEADER ================= -->
+<header>
+  <div class="logo"><i class="fas fa-shield-alt"></i> AI Verifier</div>
+  <nav id="navMenu">
+    <a href="#home"><i class="fas fa-home"></i> Home</a>
+    <a href="#verify"><i class="fas fa-search"></i> Verify</a>
+    <a href="#how"><i class="fas fa-cogs"></i> How It Works</a>
+    <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+    <a href="admin.html"><i class="fas fa-user-shield"></i> Admin</a>
+    <a href="#" id="logoutBtn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    <div class="close-menu" onclick="toggleMenu()">&times;</div>
+  </nav>
+  <div class="hamburger" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+</header>
+
+<script>
+  function logout() {
+    localStorage.removeItem('userToken');
+    localStorage.removeItem('userData');
+    window.location.href = 'login.html';
+  }
+</script>
+
+<!-- ================= HERO / FIRST PAGE ================= -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <h1><i class="fas fa-robot"></i> AI-Based Offer Letter & Company Verifier</h1>
+    <p class="hero-sub">
+      Many job seekers fall victim to fake offer letters and scam companies.
+      This system helps you verify job offer letters using
+      <b>Artificial Intelligence, Machine Learning, and Document Analysis</b>.
+    </p>
+    <p class="hero-sub">
+      The application analyzes company details, document patterns,
+      suspicious keywords, and formatting issues to predict whether
+      an offer letter is <b>Genuine</b>, <b>Suspected</b>, or <b>Fake</b>.
+    </p>
+    <a href="#verify" class="btn"><i class="fas fa-play"></i> Start Verification</a>
+  </div>
+  <div class="hero-bg"></div>
+</section>
+
+<!-- ================= MAIN VERIFICATION SECTION ================= -->
+<section class="verify" id="verify">
+  <div class="verify-card">
+    <h2><i class="fas fa-file-alt"></i> Verify Your Offer Letter</h2>
+    <p class="section-desc">
+      Upload your job offer letter in PDF or Image format. Our AI system will analyze the document and give a risk-based result.
+    </p>
+    <div class="upload-zone">
+      <label class="file-label" id="fileLabel">
+        <i class="fas fa-cloud-upload-alt upload-icon"></i>
+        <span class="upload-text">Select or Drag & Drop Offer Letter File</span>
+        <input type="file" id="fileInput" accept=".pdf,.jpg,.png">
+        <span id="fileName">No file selected</span>
+      </label>
+    </div>
+    <button class="btn verify-btn" id="verifyBtn">
+      Verify Offer Letter
+    </button>
+    <!-- Loader -->
+    <div id="loader" class="loader" style="display:none;">
+      <div class="spinner"></div>
+      <p>🔍 Analyzing your offer letter...</p>
+    </div>
+    
+    <!-- Result Box -->
+    <div class="result" id="resultBox">
+      <div class="result-header">
+        <i id="resultIcon" class="fas"></i>
+        <h3 id="resultStatus">Status</h3>
+      </div>
+      <p id="resultMsg">Message</p>
+      <div class="result-details">
+        <span id="confidence">Confidence: 85%</span>
+        <p id="tips">Tip: Always verify company details independently.</p>
+      </div>
+      
+      <!-- Detailed Analysis Section -->
+      <div id="detailedAnalysis" style="display:none; margin-top:20px; text-align:left;">
+        <h4 style="color:#0f172a; margin-bottom:10px;"><i class="fas fa-search-plus"></i> Detailed Analysis</h4>
+        
+        <!-- Domain Analysis -->
+        <div id="domainAnalysis" style="background:#f8fafc; padding:15px; border-radius:8px; margin-bottom:10px;">
+          <h5 style="color:#1e293b; margin-bottom:8px;"><i class="fas fa-globe"></i> Domain Analysis</h5>
+          <div id="domainDetails"></div>
+        </div>
+        
+        <!-- ML Analysis -->
+        <div id="mlAnalysis" style="background:#f8fafc; padding:15px; border-radius:8px;">
+          <h5 style="color:#1e293b; margin-bottom:8px;"><i class="fas fa-brain"></i> ML Model Analysis</h5>
+          <div id="mlDetails"></div>
+        </div>
+      </div>
+      
+      <!-- Download Button -->
+      <button class="btn download-btn" id="downloadReportBtn" style="display:none; margin-top:15px;">
+        <i class="fas fa-download"></i> Download Detailed Report
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOW IT WORKS ================= -->
+<section class="how" id="how">
+  <h2><i class="fas fa-lightbulb"></i> How This System Works</h2>
+  <div class="steps">
+    <div class="step">
+      <i class="fas fa-upload step-icon"></i>
+      <h3>1. Upload Document</h3>
+      <p>The user uploads an offer letter received via email or WhatsApp.</p>
+    </div>
+    <div class="step">
+      <i class="fas fa-brain step-icon"></i>
+      <h3>2. AI Analysis</h3>
+      <p>AI extracts text, detects keywords, salary promises, company format, and suspicious patterns.</p>
+    </div>
+    <div class="step">
+      <i class="fas fa-building step-icon"></i>
+      <h3>3. Company Check</h3>
+      <p>Company name and details are cross-verified using trusted data sources.</p>
+    </div>
+    <div class="step">
+      <i class="fas fa-check-circle step-icon"></i>
+      <h3>4. Final Result</h3>
+      <p>The system generates a verification result with risk indication.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="contact" id="contact">
+  <h2><i class="fas fa-map-marker-alt"></i> Contact & Location</h2>
+  <p class="project-desc">This project is developed as a TYBSc IT Final Year Project to help students and job seekers avoid employment scams.</p>
+  <div class="contact-cards">
+    <div class="card">
+      <i class="fas fa-university"></i>
+      <h3>College</h3>
+      <p>Bhavan's College, Andheri (West), Mumbai</p>
+    </div>
+    <div class="card">
+      <i class="fas fa-envelope"></i>
+      <h3>Email</h3>
+      <p>princeyadav80910@gmail.com</p>
+    </div>
+    <div class="card">
+      <i class="fas fa-phone"></i>
+      <h3>Support</h3>
+      <p>+91 8591063262</p>
+      <p>Support 24/7</p>
+    </div>
+  </div>
+  <div class="social-links">
+    <a href="https://linkedin.com/in/princeyadav08" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+    <a href="https://github.com/princeyadav-it" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+  </div>
+  
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="footer-content">
+    <div class="footer-section brand">
+      <div class="footer-logo">
+        <i class="fas fa-shield-alt"></i>
+        <span>AI Verifier</span>
+      </div>
+      <p class="footer-desc">
+        Empowering job seekers with AI-driven trust. Our advanced machine learning system helps detect fraudulent job offers and protects you from employment scams.
+      </p>
+      <div class="footer-badges">
+        <span class="badge"><i class="fas fa-robot"></i> AI Powered</span>
+        <span class="badge"><i class="fas fa-brain"></i> ML Based</span>
+        <span class="badge"><i class="fas fa-lock"></i> Secure</span>
+      </div>
+    </div>
+    
+    <div class="footer-section links">
+      <h4><i class="fas fa-link"></i> Quick Links</h4>
+      <ul>
+        <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
+        <li><a href="#verify"><i class="fas fa-chevron-right"></i> Verify Offer</a></li>
+        <li><a href="#how"><i class="fas fa-chevron-right"></i> How It Works</a></li>
+        <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
+        <li><a href="admin.html"><i class="fas fa-chevron-right"></i> Admin Panel</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-section contact-info">
+      <h4><i class="fas fa-address-card"></i> Contact Info</h4>
+      <ul>
+        <li><i class="fas fa-university"></i> Bhavan's College, Andheri (W), Mumbai</li>
+        <li><i class="fas fa-envelope"></i> princeyadav80910@gmail.com</li>
+        <li><i class="fas fa-phone"></i> +91 8591063262</li>
+        <li><i class="fas fa-clock"></i> Support: 24/7</li>
+      </ul>
+    </div>
+    
+    <div class="footer-section social">
+      <h4><i class="fas fa-share-alt"></i> Connect With Us</h4>
+      <div class="social-icons">
+        <a href="https://linkedin.com/in/princeyadav08" target="_blank" class="social-icon linkedin" title="LinkedIn">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="https://github.com/princeyadav-it" target="_blank" class="social-icon github" title="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="mailto:princeyadav80910@gmail.com" class="social-icon email" title="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
+        <a href="tel:+918591063262" class="social-icon phone" title="Call">
+          <i class="fas fa-phone-alt"></i>
+        </a>
+      </div>
+      <div class="newsletter">
+        <p>Subscribe for updates:</p>
+        <div class="newsletter-form">
+          <input type="email" placeholder="Your email...">
+          <button><i class="fas fa-paper-plane"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <div class="footer-copyright">
+      <p>© 2026 <i class="fas fa-shield-alt"></i> AI Offer Letter & Company Verifier. All Rights Reserved.</p>
+      <p class="creator">Created with <i class="fas fa-heart" style="color:#ef4444;"></i> by <b>Prince Yadav</b> | TYBSc IT Final Year Project</p>
+    </div>
+    <div class="footer-legal">
+      <a href="#">Privacy Policy</a>
+      <span class="divider">|</span>
+      <a href="#">Terms of Service</a>
+      <span class="divider">|</span>
+      <a href="#">Disclaimer</a>
+    </div>
+  </div>
+  
+  <button class="back-to-top" onclick="scrollToTop()" title="Back to Top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+</footer>
+
+<!-- ================= CHATBOT ================= -->
+<div class="chatbot-toggle" id="chatbotToggle">
+  <i class="fas fa-comments"></i>
+</div>
+<div class="chatbot-window" id="chatbotWindow">
+  <div class="chatbot-header">
+    <h3><i class="fas fa-robot"></i> AI Assistant</h3>
+    <button class="chatbot-close" id="chatbotClose">&times;</button>
+  </div>
+  <div class="chatbot-messages" id="chatbotMessages">
+    <div class="chatbot-message bot">
+      <p>Hello! I'm here to help you understand the offer letter verification process. Ask me anything!</p>
+    </div>
+  </div>
+  <div class="chatbot-input">
+    <input type="text" id="chatbotInput" placeholder="Type your message...">
+    <button id="chatbotSend"><i class="fas fa-paper-plane"></i></button>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+
+</body>
+</html>

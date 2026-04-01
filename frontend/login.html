@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - AI Offer Letter Verifier</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="auth-page">
+
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="auth-logo">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <h1>AI Verifier</h1>
+        <p>Welcome back! Please login to continue</p>
+      </div>
+
+      <form id="loginForm" class="auth-form">
+        <div class="form-group">
+          <label for="email">
+            <i class="fas fa-envelope"></i> Email Address
+          </label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="password">
+            <i class="fas fa-lock"></i> Password
+          </label>
+          <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        </div>
+
+        <div id="errorMessage" class="error-message" style="display: none;"></div>
+
+        <button type="submit" class="btn auth-btn">
+          <i class="fas fa-sign-in-alt"></i> Login
+        </button>
+
+        <div class="auth-loader" id="authLoader" style="display: none;">
+          <div class="spinner"></div>
+          <p>Logging in...</p>
+        </div>
+      </form>
+
+      <div class="auth-footer">
+        <p>Don't have an account? <a href="signup.html" class="auth-link">Create Account</a></p>
+      </div>
+
+      <div class="auth-back">
+        <a href="index.html"><i class="fas fa-arrow-left"></i> Back to Home</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Check if user is already logged in
+    const token = localStorage.getItem('userToken');
+    if (token) {
+      window.location.href = 'index.html';
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const errorMessage = document.getElementById('errorMessage');
+      const authLoader = document.getElementById('authLoader');
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+
+      // Hide previous error
+      errorMessage.style.display = 'none';
+
+      // Show loader
+      authLoader.style.display = 'block';
+      submitBtn.disabled = true;
+
+      try {
+        const response = await fetch('http://localhost:5000/api/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          // Store token and user info
+          localStorage.setItem('userToken', data.token);
+          localStorage.setItem('userData', JSON.stringify(data.user));
+          
+          // Redirect to main page
+          window.location.href = 'index.html';
+        } else {
+          errorMessage.textContent = data.error || 'Login failed. Please try again.';
+          errorMessage.style.display = 'block';
+        }
+      } catch (error) {
+        console.error('Login error:', error);
+        errorMessage.textContent = 'Unable to connect to server. Please make sure the backend is running.';
+        errorMessage.style.display = 'block';
+      } finally {
+        authLoader.style.display = 'none';
+        submitBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
